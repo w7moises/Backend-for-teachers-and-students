@@ -35,7 +35,7 @@ public class TarjetaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tarjetas/{nombre}")
+    @GetMapping("/tarjetas/nombre/{nombre}")
     public BookingResponse<List<TarjetaDto>> getTarjetasByNombre(@PathVariable String nombre) throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 tarjetaService.getTarjetasByNombre(nombre));

@@ -20,7 +20,7 @@ public class CursoController {
     CursoService cursoService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/cursos/id/{cursoId}")
+    @GetMapping("/cursos/{cursoId}")
     public BookingResponse<CursoDto> getCursoById(@PathVariable Long cursoId)throws BookingException{
         return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
                 cursoService.getCursoById(cursoId));
