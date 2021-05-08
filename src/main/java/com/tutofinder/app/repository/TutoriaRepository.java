@@ -14,4 +14,5 @@ public interface TutoriaRepository extends PagingAndSortingRepository<Tutoria,Lo
 
     @Query(value = "SELECT t FROM Tutoria t ORDER BY CASE WHEN t.docente.membresia = true THEN 1 ELSE 2 END , t.docente.membresia")
     List<Tutoria> findAll();
+
 }
