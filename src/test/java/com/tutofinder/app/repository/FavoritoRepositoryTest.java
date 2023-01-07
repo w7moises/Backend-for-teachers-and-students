@@ -45,29 +45,29 @@ public class FavoritoRepositoryTest {
         double costoHora = 23.5;
         boolean membresia = true;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
         List Alumnos = new ArrayList<Alumno>();
 
 
-        Docente docente = new Docente(id,nombre,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
+        Docente docente = new Docente(id, nombre, apellido, dni, domicilio, correo, numeroCuenta, costoHora, membresia, foto, tutorias, fecha);
         underTest2.save(docente);
 
-        Padre padre = new Padre(id,nombre ,apellido,dni,correo,foto,fecha,Alumnos);
+        Padre padre = new Padre(id, nombre, apellido, dni, correo, foto, fecha, Alumnos);
         underTest3.save(padre);
 
         Optional<Padre> searchPadre = underTest3.findById(padre.getId());
         Optional<Docente> searchDocente = underTest2.findById(docente.getId());
 
 
-        Favorito favorito = new Favorito(id,searchPadre.get(),searchDocente.get());
+        Favorito favorito = new Favorito(id, searchPadre.get(), searchDocente.get());
         underTest.save(favorito);
 
         Optional<Favorito> optionalfavorito = underTest.findById(id);
 
         assertThat(optionalfavorito).isPresent().hasValueSatisfying(
-                c->{
-                    assertThat(c).isEqualToIgnoringGivenFields(favorito,"createAt");
+                c -> {
+                    assertThat(c).isEqualToIgnoringGivenFields(favorito, "createAt");
                 }
         );
 
@@ -79,14 +79,14 @@ public class FavoritoRepositoryTest {
         Docente docente = new Docente();
         Padre padre = new Padre();
 
-        Favorito favorito = new Favorito(id,padre,docente);
+        Favorito favorito = new Favorito(id, padre, docente);
 
         underTest.save(favorito);
 
-        Optional<Favorito> optionalFavorito= underTest.findById(id);
+        Optional<Favorito> optionalFavorito = underTest.findById(id);
 
         assertThat(optionalFavorito).isPresent().hasValueSatisfying(
-                c->{
+                c -> {
                     assertThat(c).isEqualTo(favorito);
                 }
         );
@@ -109,22 +109,18 @@ public class FavoritoRepositoryTest {
         double costoHora = 23.5;
         boolean membresia = true;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
         List Alumnos = new ArrayList<Alumno>();
 
 
-        Docente docente = new Docente(id,nombre,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
+        Docente docente = new Docente(id, nombre, apellido, dni, domicilio, correo, numeroCuenta, costoHora, membresia, foto, tutorias, fecha);
 
 
+        Favorito favorito = new Favorito(id, null, docente);
 
 
-
-
-        Favorito favorito = new Favorito(id,null,docente);
-
-
-        assertThatThrownBy(()->underTest.save(favorito))
+        assertThatThrownBy(() -> underTest.save(favorito))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Favorito.padre")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

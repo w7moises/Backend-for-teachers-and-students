@@ -25,40 +25,42 @@ public class TutoriaController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tutorias/{tutoriaId}")
     public BookingResponse<TutoriaDto> getTutoriaById(@PathVariable Long tutoriaId) throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 tutoriaService.getTutoriaById(tutoriaId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tutorias")
-    public BookingResponse<List<TutoriaDto>> getTutorias() throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<List<TutoriaDto>> getTutorias() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 tutoriaService.getTutorias());
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tutorias/pagina")
-    public BookingResponse<?> getTutorias(Pageable pageable) throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<?> getTutorias(Pageable pageable) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 tutoriaService.getTutorias(pageable));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/tutorias")
-    public BookingResponse<TutoriaDto> createTutoria(@RequestBody @Valid CreateTutoriaDto createTutoriaDto)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<TutoriaDto> createTutoria(@RequestBody @Valid CreateTutoriaDto createTutoriaDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 tutoriaService.createTutoria(createTutoriaDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/tutorias/{tutoriaId}")
-    public BookingResponse<TutoriaDto> updateTutoria(@PathVariable Long tutoriaId, @RequestBody @Valid CreateTutoriaDto createTutoriaDto)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                tutoriaService.updateTutoria(createTutoriaDto,tutoriaId));
+    public BookingResponse<TutoriaDto> updateTutoria(@PathVariable Long tutoriaId, @RequestBody @Valid CreateTutoriaDto createTutoriaDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                tutoriaService.updateTutoria(createTutoriaDto, tutoriaId));
     }
+
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/tutorias/{tutoriaId}")
-    public BookingResponse<String> deleteTutoria(@PathVariable Long tutoriaId) throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<String> deleteTutoria(@PathVariable Long tutoriaId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 tutoriaService.deleteTutoria(tutoriaId));
     }
 }

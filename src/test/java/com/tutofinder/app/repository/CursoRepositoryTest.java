@@ -26,14 +26,14 @@ public class CursoRepositoryTest {
         Long id = 1L;
         String nombre = "Fisica";
 
-        Curso curso = new Curso(id,nombre);
+        Curso curso = new Curso(id, nombre);
 
         underTest.save(curso);
 
-        Optional<Curso> optionalCurso= underTest.findById(id);
+        Optional<Curso> optionalCurso = underTest.findById(id);
 
         assertThat(optionalCurso).isPresent().hasValueSatisfying(
-                c->{
+                c -> {
                     assertThat(c).isEqualToComparingFieldByField(curso);
                 }
         );
@@ -52,9 +52,9 @@ public class CursoRepositoryTest {
     void itShouldNotSaveCursoWhenNombreIsNull() {
         Long id = 1L;
 
-        Curso curso = new Curso(id,null);
+        Curso curso = new Curso(id, null);
 
-        assertThatThrownBy(()->underTest.save(curso))
+        assertThatThrownBy(() -> underTest.save(curso))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Curso.nombre")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

@@ -33,10 +33,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class PadreServiceTest {
     private static final Long PADRE_ID = 1L;
     private static final String NOMBRE_PADRE = "RASO";
-    private static final String NOMBRE_APELLIDO="RES";
-    private static final String DNI ="AADADD";
+    private static final String NOMBRE_APELLIDO = "RES";
+    private static final String DNI = "AADADD";
     private static final String CORREO = "SDADADDDADA";
-    private static  final byte [] FOTO  = "Any String you want".getBytes();
+    private static final byte[] FOTO = "Any String you want".getBytes();
     private static final Date DATE = new Date();
     private static final MultipartFile FILE = new MultipartFile() {
         @Override
@@ -82,12 +82,12 @@ public class PadreServiceTest {
 
     CreatePadreDto CREATE_PADRE_DTO = new CreatePadreDto();
 
-    public  static  final Padre PADRE = new Padre();
+    public static final Padre PADRE = new Padre();
 
     private static final Optional<Padre> OPTIONAL_PADRE_EMPTY = Optional.empty();
     private static final Optional<Padre> OPTIONAL_PADRE = Optional.of(PADRE);
     public static final List<Alumno> ALUMNNO_LIST = new ArrayList<>();
-    
+
     @Mock
     PadreRepository padreRepository;
 
@@ -95,7 +95,7 @@ public class PadreServiceTest {
     PadreServiceImpl padreServiceImpl;
 
     @Before
-    public  void init() throws  BookingException{
+    public void init() throws BookingException {
         MockitoAnnotations.initMocks(this);
         PADRE.setId(PADRE_ID);
         PADRE.setNombre(NOMBRE_PADRE);
@@ -107,12 +107,13 @@ public class PadreServiceTest {
     }
 
     @Test
-    public void getPadreByIdTest() throws BookingException{
+    public void getPadreByIdTest() throws BookingException {
         Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
         padreServiceImpl.getPadreById(PADRE_ID);
     }
+
     @Test
-    public void  getPadresTest() throws BookingException {
+    public void getPadresTest() throws BookingException {
         final Padre padre = new Padre();
         Mockito.when(padreRepository.findAll()).thenReturn(Arrays.asList(padre));
         final List<PadreDto> response = padreServiceImpl.getPadres();
@@ -120,14 +121,16 @@ public class PadreServiceTest {
         assertFalse(response.isEmpty());
         assertEquals(response.size(), 1);
     }
+
     @Test
     public void createPadreTest() throws BookingException, IOException {
         Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
         Mockito.when(padreRepository.save(Mockito.any(Padre.class))).thenReturn(PADRE);
-        padreServiceImpl.createPadre(CREATE_PADRE_DTO,FILE);
+        padreServiceImpl.createPadre(CREATE_PADRE_DTO, FILE);
     }
+
     @Test
-    public void deletePadreTest() throws BookingException{
+    public void deletePadreTest() throws BookingException {
         Mockito.when(padreRepository.findById(PADRE_ID)).thenReturn(OPTIONAL_PADRE);
         padreServiceImpl.deletePadre(PADRE_ID);
     }

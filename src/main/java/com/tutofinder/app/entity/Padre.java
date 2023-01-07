@@ -33,12 +33,12 @@ public class Padre {
     private String apellido;
 
     @NotEmpty(message = "El DNI del padre no puede estar vacio")
-    @Column(unique = true,nullable = false,length = 8)
+    @Column(unique = true, nullable = false, length = 8)
     private String dni;
 
     @NotEmpty(message = "El correo no debe estar vacio")
     @Email(message = "Debe tener @")
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String correo;
 
     @Lob
@@ -58,7 +58,7 @@ public class Padre {
         this.createAt = new Date();
     }
 
-    public Integer getFotoHashCode(){
+    public Integer getFotoHashCode() {
         return (this.foto != null) ? this.foto.hashCode() : null;
     }
 

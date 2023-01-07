@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ReservaRepository extends JpaRepository<Reserva,Long> {
+public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     Optional<Reserva> findById(Long id);
 }

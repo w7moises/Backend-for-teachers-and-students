@@ -38,25 +38,25 @@ public class MembresiaServiceImpl implements MembresiaService {
     @Override
     @Transactional(readOnly = true)
     public MembresiaDto getMembresiaById(Long membresiaId) throws BookingException {
-        return modelMapper.map(getMembresiaEntity(membresiaId),MembresiaDto.class);
+        return modelMapper.map(getMembresiaEntity(membresiaId), MembresiaDto.class);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<MembresiaDto> getMembresias() throws BookingException {
         List<Membresia> membresiaEntity = membresiaRepository.findAll();
-        return membresiaEntity.stream().map(service -> modelMapper.map(service,MembresiaDto.class)).collect(Collectors.toList());
+        return membresiaEntity.stream().map(service -> modelMapper.map(service, MembresiaDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public MembresiaDto createMembresia(CreateMembresiaDto createMembresiaDto) throws BookingException {
         final Docente docente = docenteRepository.findById(createMembresiaDto.getDocenteId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
-        final Tarjeta tarjeta= tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "DOCENTE_NOT_FOUND"));
+        final Tarjeta tarjeta = tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "TARJETA_NOT_FOUND"));
 
-        if(membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
-            throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
+        if (membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(), tarjeta.getId()).isPresent()) {
+            throw new NotFoundException("MEMBRESIA_EXIST", "MEMBRESIA_EXIST");
         }
         Membresia membresiaEntity = new Membresia();
         Long id;
@@ -68,24 +68,24 @@ public class MembresiaServiceImpl implements MembresiaService {
 
         try {
             id = membresiaRepository.save(membresiaEntity).getId();
-        }catch (Exception ex){
-            throw  new InternalServerErrorException("INTERNAL_ERROR","INTERNAL_ERROR");
+        } catch (Exception ex) {
+            throw new InternalServerErrorException("INTERNAL_ERROR", "INTERNAL_ERROR");
         }
-        return modelMapper.map(getMembresiaEntity(id),MembresiaDto.class);
+        return modelMapper.map(getMembresiaEntity(id), MembresiaDto.class);
     }
 
     @Override
     public MembresiaDto updateMembresia(CreateMembresiaDto createMembresiaDto, Long membresiaId) throws BookingException {
         final Docente docente = docenteRepository.findById(createMembresiaDto.getDocenteId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
-        final Tarjeta tarjeta= tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","TARJETA_NOT_FOUND"));
-        if(membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(),tarjeta.getId()).isPresent()){
-            throw new NotFoundException("MEMBRESIA_EXIST","MEMBRESIA_EXIST");
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "DOCENTE_NOT_FOUND"));
+        final Tarjeta tarjeta = tarjetaRepository.findById(createMembresiaDto.getTarjetaId())
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "TARJETA_NOT_FOUND"));
+        if (membresiaRepository.findByDocenteIdAndTarjetaId(docente.getId(), tarjeta.getId()).isPresent()) {
+            throw new NotFoundException("MEMBRESIA_EXIST", "MEMBRESIA_EXIST");
         }
         Optional<Membresia> membresia = membresiaRepository.findById(membresiaId);
-        if(!membresia.isPresent()){
-            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        if (!membresia.isPresent()) {
+            throw new NotFoundException("ID_NOT_FOOUND", "ID_NOT_FOUND");
         }
         Membresia membresiaEntity = membresia.get();
         Long id;
@@ -97,26 +97,26 @@ public class MembresiaServiceImpl implements MembresiaService {
 
         try {
             id = membresiaRepository.save(membresiaEntity).getId();
-        }catch (Exception ex){
-            throw  new InternalServerErrorException("INTERNAL_ERROR","INTERNAL_ERROR");
+        } catch (Exception ex) {
+            throw new InternalServerErrorException("INTERNAL_ERROR", "INTERNAL_ERROR");
         }
-        return modelMapper.map(getMembresiaEntity(id),MembresiaDto.class);
+        return modelMapper.map(getMembresiaEntity(id), MembresiaDto.class);
     }
 
     @Override
     public String deleteMembresia(Long membresiaId) throws BookingException {
         membresiaRepository.findById(membresiaId)
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","MEMBRESIA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "MEMBRESIA_NOT_FOUND"));
         try {
             membresiaRepository.deleteById(membresiaId);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
         return "INFORME_DELETED";
     }
 
-    private Membresia getMembresiaEntity(Long membresiaId) throws BookingException{
+    private Membresia getMembresiaEntity(Long membresiaId) throws BookingException {
         return membresiaRepository.findById(membresiaId)
-                .orElseThrow(() -> new NotFoundException("SNOT-404-1","MEMBRESIA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "MEMBRESIA_NOT_FOUND"));
     }
 }

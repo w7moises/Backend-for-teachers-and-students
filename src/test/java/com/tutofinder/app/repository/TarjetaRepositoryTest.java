@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.springframework.dao.DataIntegrityViolationException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @DataJpaTest(
         properties = {
-               "spring.jpa.properties.javax.persistence.validation.mode=none"
+                "spring.jpa.properties.javax.persistence.validation.mode=none"
         }
 )
 public class TarjetaRepositoryTest {
@@ -31,14 +32,14 @@ public class TarjetaRepositoryTest {
         String fechaExpiracion = "05/21";
         String nombrePoseedor = "Walter Molina";
 
-        Tarjeta tarjeta = new Tarjeta(id,numeroTarjeta,fechaExpiracion,nombrePoseedor);
+        Tarjeta tarjeta = new Tarjeta(id, numeroTarjeta, fechaExpiracion, nombrePoseedor);
 
         underTest.save(tarjeta);
 
         Optional<Tarjeta> optionalTarjeta = underTest.findById(id);
 
         assertThat(optionalTarjeta).isPresent().hasValueSatisfying(
-                c->{
+                c -> {
                     assertThat(c).isEqualTo(tarjeta);
                 }
         );
@@ -59,11 +60,11 @@ public class TarjetaRepositoryTest {
         String numeroTarjeta = "1234123412341234";
         String fechaExpiracion = "05/21";
 
-        Tarjeta tarjeta = new Tarjeta(id,numeroTarjeta,fechaExpiracion,null);
+        Tarjeta tarjeta = new Tarjeta(id, numeroTarjeta, fechaExpiracion, null);
 
-        assertThatThrownBy(()->underTest.save(tarjeta))
-        .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Tarjeta.nombrePoseedor")
-        .isInstanceOf(DataIntegrityViolationException.class);
+        assertThatThrownBy(() -> underTest.save(tarjeta))
+                .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Tarjeta.nombrePoseedor")
+                .isInstanceOf(DataIntegrityViolationException.class);
     }
 
     @Test
@@ -72,9 +73,9 @@ public class TarjetaRepositoryTest {
         String numeroTarjeta = "1234123412341234";
         String nombrePoseedor = "Walter Molina";
 
-        Tarjeta tarjeta = new Tarjeta(id,numeroTarjeta,null,nombrePoseedor);
+        Tarjeta tarjeta = new Tarjeta(id, numeroTarjeta, null, nombrePoseedor);
 
-        assertThatThrownBy(()->underTest.save(tarjeta))
+        assertThatThrownBy(() -> underTest.save(tarjeta))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Tarjeta.fechaExpiracion")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
@@ -85,9 +86,9 @@ public class TarjetaRepositoryTest {
         String fechaExpiracion = "05/21";
         String nombrePoseedor = "Walter Molina";
 
-        Tarjeta tarjeta = new Tarjeta(id,null,fechaExpiracion,nombrePoseedor);
+        Tarjeta tarjeta = new Tarjeta(id, null, fechaExpiracion, nombrePoseedor);
 
-        assertThatThrownBy(()->underTest.save(tarjeta))
+        assertThatThrownBy(() -> underTest.save(tarjeta))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Tarjeta.numeroTarjeta")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

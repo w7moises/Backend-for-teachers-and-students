@@ -37,14 +37,14 @@ public class PadreRepositoryTest {
         Date fecha = new Date();
         List Alumnos = new ArrayList<Alumno>();
 
-        Padre padre = new Padre(id,nombre ,apellido,dni,correo,foto,fecha,Alumnos);
+        Padre padre = new Padre(id, nombre, apellido, dni, correo, foto, fecha, Alumnos);
         underTest.save(padre);
 
         Optional<Padre> optionalPadre = underTest.findById(id);
 
         assertThat(optionalPadre).isPresent().hasValueSatisfying(
-                c->{
-                    assertThat(c).isEqualToIgnoringGivenFields(padre,"createAt");
+                c -> {
+                    assertThat(c).isEqualToIgnoringGivenFields(padre, "createAt");
                 }
         );
     }
@@ -71,10 +71,10 @@ public class PadreRepositoryTest {
         Date fecha = new Date();
         List Alumnos = new ArrayList<Alumno>();
 
-        Padre padre = new Padre(id,null ,apellido,dni,correo,foto,fecha,Alumnos);
+        Padre padre = new Padre(id, null, apellido, dni, correo, foto, fecha, Alumnos);
 
 
-        assertThatThrownBy(()->underTest.save(padre))
+        assertThatThrownBy(() -> underTest.save(padre))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Padre.nombre")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

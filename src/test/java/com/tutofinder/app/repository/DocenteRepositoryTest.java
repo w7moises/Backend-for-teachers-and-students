@@ -35,18 +35,18 @@ public class DocenteRepositoryTest {
         double costoHora = 23.5;
         boolean membresia = true;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
 
-        Docente docente = new Docente(id,nombre,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
+        Docente docente = new Docente(id, nombre, apellido, dni, domicilio, correo, numeroCuenta, costoHora, membresia, foto, tutorias, fecha);
 
         underTest.save(docente);
 
-        Optional<Docente> optionalDocente= underTest.findById(id);
+        Optional<Docente> optionalDocente = underTest.findById(id);
 
         assertThat(optionalDocente).isPresent().hasValueSatisfying(
-                c->{
-                    assertThat(c).isEqualToIgnoringGivenFields(docente,"createAt");
+                c -> {
+                    assertThat(c).isEqualToIgnoringGivenFields(docente, "createAt");
                 }
         );
     }
@@ -59,6 +59,7 @@ public class DocenteRepositoryTest {
 
         assertThat(optionalDocente).isNotPresent();
     }
+
     @Test
     void itShouldNotSaveDocenteWhenNombreIsNull() {
         Long id = 1L;
@@ -71,14 +72,13 @@ public class DocenteRepositoryTest {
         double costoHora = 23.5;
         boolean membresia = true;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
 
 
+        Docente docente = new Docente(id, null, apellido, dni, domicilio, correo, numeroCuenta, costoHora, membresia, foto, tutorias, fecha);
 
-        Docente docente = new Docente(id,null,apellido,dni,domicilio,correo,numeroCuenta,costoHora,membresia,foto,tutorias,fecha);
-
-        assertThatThrownBy(()->underTest.save(docente))
+        assertThatThrownBy(() -> underTest.save(docente))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Docente.nombre")
                 .isInstanceOf(DataIntegrityViolationException.class);
 

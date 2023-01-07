@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="informes")
+@Table(name = "informes")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,7 +19,7 @@ public class Informe {
     @Column(name = "informe_id")
     private Long id;
 
-    @Column(name = "descripcion_informe",nullable = false)
+    @Column(name = "descripcion_informe", nullable = false)
     private String descripcionInforme;
 
     @ManyToOne(fetch = FetchType.LAZY)

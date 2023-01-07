@@ -24,11 +24,11 @@ public class Pago {
     private String descripcionPago;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "padre_id",nullable = false)
+    @JoinColumn(name = "padre_id", nullable = false)
     private Padre padre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tarjeta_id",nullable = false)
+    @JoinColumn(name = "tarjeta_id", nullable = false)
     private Tarjeta tarjeta;
 
     @Column(name = "costo_pago")

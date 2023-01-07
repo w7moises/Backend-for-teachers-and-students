@@ -19,10 +19,10 @@ public class Favorito {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "padre_id",nullable = false)
+    @JoinColumn(name = "padre_id", nullable = false)
     private Padre padre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "docente_id",nullable = false)
+    @JoinColumn(name = "docente_id", nullable = false)
     private Docente docente;
 }

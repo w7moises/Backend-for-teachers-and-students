@@ -23,29 +23,29 @@ public class ReservaController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/reservas/{reservaId}")
     public BookingResponse<ReservaDto> getReservaById(@PathVariable Long reservaId) throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 reservaService.getReservaById(reservaId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/reservas")
-    public BookingResponse<List<ReservaDto>> getReservas() throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<List<ReservaDto>> getReservas() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 reservaService.getReservas());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/reservas")
-    public BookingResponse<ReservaDto> createReserva(@RequestBody @Valid CreateReservaDto createreservaDto)throws BookingException, IOException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<ReservaDto> createReserva(@RequestBody @Valid CreateReservaDto createreservaDto) throws BookingException, IOException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 reservaService.createReserva(createreservaDto));
     }
 
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/reservas/{reservaId}")
-    public BookingResponse<String> deleteReserva(@PathVariable Long reservaId) throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<String> deleteReserva(@PathVariable Long reservaId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 reservaService.deleteReserva(reservaId));
     }
 }

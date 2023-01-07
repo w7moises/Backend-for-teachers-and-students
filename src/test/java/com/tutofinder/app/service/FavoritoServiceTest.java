@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FavoritoServiceTest {
     private static final Long FAVORITO_ID = 1L;
-    private static  final Long PADRE_ID = 1L;
-    private static  final Long DOCENTE_ID = 1L;
+    private static final Long PADRE_ID = 1L;
+    private static final Long DOCENTE_ID = 1L;
 
     public static final Favorito FAVORITO = new Favorito();
 
@@ -43,7 +43,6 @@ public class FavoritoServiceTest {
     FavoritoServiceImpl favoritoServiceImpl;
 
 
-
     @Before
     public void init() throws BookingException {
         MockitoAnnotations.initMocks(this);
@@ -58,13 +57,13 @@ public class FavoritoServiceTest {
     }
 
     @Test
-    public void getFavoritoByIdTest() throws BookingException{
+    public void getFavoritoByIdTest() throws BookingException {
         Mockito.when(favoritoRepository.findById(FAVORITO_ID)).thenReturn(OPTIONAL_FAVORITO);
         favoritoServiceImpl.getFavoritoById(FAVORITO_ID);
     }
 
     @Test
-    public void getFavoritoTest() throws BookingException{
+    public void getFavoritoTest() throws BookingException {
         final Favorito favorito = new Favorito();
         Mockito.when(favoritoRepository.findAll()).thenReturn(Arrays.asList(favorito));
         final List<FavoritoDto> response = favoritoServiceImpl.getFavoritos();
@@ -74,14 +73,14 @@ public class FavoritoServiceTest {
     }
 
     @Test(expected = BookingException.class)
-    public void getFavoritoByIdTestError() throws BookingException{
+    public void getFavoritoByIdTestError() throws BookingException {
         Mockito.when(favoritoRepository.findById(FAVORITO_ID)).thenReturn(OPTIONAL_FAVORITO_EMPTY);
         favoritoServiceImpl.getFavoritoById(FAVORITO_ID);
         fail();
     }
 
     @Test
-    public void createFavoritoTest() throws BookingException{
+    public void createFavoritoTest() throws BookingException {
         Mockito.when(favoritoRepository.findById(FAVORITO_ID)).thenReturn(OPTIONAL_FAVORITO);
         Mockito.when(favoritoRepository.save(Mockito.any(Favorito.class))).thenReturn(FAVORITO);
         favoritoServiceImpl.createFavorito(CREATE_FAVORITO_DTO);

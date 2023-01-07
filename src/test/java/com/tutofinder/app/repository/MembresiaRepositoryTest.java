@@ -30,6 +30,7 @@ public class MembresiaRepositoryTest {
 
     @Autowired
     private TarjetaRepository underTest3;
+
     @Test
     void itShouldGetMembresiaById() {
         Long id = 1L;
@@ -47,34 +48,34 @@ public class MembresiaRepositoryTest {
         String descripcionMembrecia = "Descripcion";
         Double costoMembrecia = 20.0;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
 
-        Docente docente = new Docente(id,"nombre","apelido","jr 28 de agosto 302","12345678","correo@correo.com",
-                "123123123",25.5,true,foto,tutorias,fecha);
+        Docente docente = new Docente(id, "nombre", "apelido", "jr 28 de agosto 302", "12345678", "correo@correo.com",
+                "123123123", 25.5, true, foto, tutorias, fecha);
         underTest2.save(docente);
 
-        Tarjeta tarjeta = new Tarjeta(id,"41241241241","30-1-23","NombrePoseedor");
+        Tarjeta tarjeta = new Tarjeta(id, "41241241241", "30-1-23", "NombrePoseedor");
         underTest3.save(tarjeta);
 
 
         Optional<Docente> optionalDocente = underTest2.findById(id);
-        Optional<Tarjeta > optionalTarjeta = underTest3.findById(id);
+        Optional<Tarjeta> optionalTarjeta = underTest3.findById(id);
 
-        Membresia membresiaEntity = new Membresia(id,optionalDocente.get(),optionalTarjeta.get(),fechaExpiracion,descripcionMembrecia,costoMembrecia);
+        Membresia membresiaEntity = new Membresia(id, optionalDocente.get(), optionalTarjeta.get(), fechaExpiracion, descripcionMembrecia, costoMembrecia);
         underTest.save(membresiaEntity);
 
-        Optional<Membresia> optionalMembresia= underTest.findById(id);
+        Optional<Membresia> optionalMembresia = underTest.findById(id);
 
         assertThat(optionalMembresia).isPresent().hasValueSatisfying(
-                c->{
+                c -> {
                     assertThat(c).isEqualTo(membresiaEntity);
                 }
         );
     }
 
     @Test
-    void itShouldNotSaveMembreciaWhenTarjetaIsNull(){
+    void itShouldNotSaveMembreciaWhenTarjetaIsNull() {
         Long id = 1L;
         String descripcionInforme = "Buen trabajo";
         //Docente
@@ -90,15 +91,15 @@ public class MembresiaRepositoryTest {
         String descripcionMembrecia = "Descripcion";
         Double costoMembrecia = 20.0;
         byte[] foto = "Foto".getBytes();
-        List tutorias  = new ArrayList<Tutoria>();
+        List tutorias = new ArrayList<Tutoria>();
         Date fecha = new Date();
 
-        Docente docente = new Docente(id,"nombre","apelido","jr 28 de agosto 302","12345678","correo@correo.com",
-                "123123123",25.5,true,foto,tutorias,fecha);
+        Docente docente = new Docente(id, "nombre", "apelido", "jr 28 de agosto 302", "12345678", "correo@correo.com",
+                "123123123", 25.5, true, foto, tutorias, fecha);
 
-        Membresia membresiaEntity = new Membresia(id,docente,null,fechaExpiracion,descripcionMembrecia,costoMembrecia);
+        Membresia membresiaEntity = new Membresia(id, docente, null, fechaExpiracion, descripcionMembrecia, costoMembrecia);
 
-        assertThatThrownBy(()->underTest.save(membresiaEntity))
+        assertThatThrownBy(() -> underTest.save(membresiaEntity))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Membresia.tarjeta")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

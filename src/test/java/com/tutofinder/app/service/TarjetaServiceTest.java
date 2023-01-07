@@ -41,7 +41,7 @@ public class TarjetaServiceTest {
     TarjetaServiceImpl tarjetaServiceImpl;
 
     @Before
-    public void init() throws BookingException{
+    public void init() throws BookingException {
         MockitoAnnotations.initMocks(this);
 
         TARJETA.setId(TARJETA_ID);
@@ -55,14 +55,14 @@ public class TarjetaServiceTest {
     }
 
     @Test
-    public void getTarjetaByIdTest() throws BookingException{
+    public void getTarjetaByIdTest() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
         tarjetaServiceImpl.getTarjetaById(TARJETA_ID);
     }
 
     @Test
-    public void getTarjetasTest() throws BookingException{
-        final Tarjeta tarjeta = new  Tarjeta();
+    public void getTarjetasTest() throws BookingException {
+        final Tarjeta tarjeta = new Tarjeta();
         Mockito.when(tarjetaRepository.findAll()).thenReturn(Arrays.asList(tarjeta));
         final List<TarjetaDto> response = tarjetaServiceImpl.getTarjetas();
         assertNotNull(response);
@@ -71,14 +71,14 @@ public class TarjetaServiceTest {
     }
 
     @Test(expected = BookingException.class)
-    public void getTarjetaByIdTestError() throws BookingException{
+    public void getTarjetaByIdTestError() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA_EMPTY);
         tarjetaServiceImpl.getTarjetaById(TARJETA_ID);
         fail();
     }
 
     @Test
-    public void createTarjetaTest() throws BookingException{
+    public void createTarjetaTest() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
         Mockito.when(tarjetaRepository.save(Mockito.any(Tarjeta.class))).thenReturn(TARJETA);
         tarjetaServiceImpl.createTarjeta(CREATE_TARJETA_DTO);

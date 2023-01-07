@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 public class BookingResponse<T> implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private String status;
     private String code;

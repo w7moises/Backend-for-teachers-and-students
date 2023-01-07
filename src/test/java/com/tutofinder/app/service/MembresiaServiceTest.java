@@ -70,13 +70,13 @@ public class MembresiaServiceTest {
     }
 
     @Test
-    public void getMembresiaByIdTest() throws BookingException{
+    public void getMembresiaByIdTest() throws BookingException {
         Mockito.when(membresiaRepository.findById(MEMBRESIA_ID)).thenReturn(OPTIONAL_MEMBRESIA);
         membresiaServiceImpl.getMembresiaById(MEMBRESIA_ID);
     }
 
     @Test
-    public void getMembresiaTest() throws BookingException{
+    public void getMembresiaTest() throws BookingException {
         final Membresia membresia = new Membresia();
         Mockito.when(membresiaRepository.findAll()).thenReturn(Arrays.asList(membresia));
         final List<MembresiaDto> response = membresiaServiceImpl.getMembresias();
@@ -86,14 +86,14 @@ public class MembresiaServiceTest {
     }
 
     @Test(expected = BookingException.class)
-    public void getMembresiaByIdTestError() throws BookingException{
+    public void getMembresiaByIdTestError() throws BookingException {
         Mockito.when(membresiaRepository.findById(MEMBRESIA_ID)).thenReturn(OPTIONAL_INFORME_EMPTY);
         membresiaServiceImpl.getMembresiaById(MEMBRESIA_ID);
         fail();
     }
 
     @Test
-    public void createMembresiaTest() throws BookingException{
+    public void createMembresiaTest() throws BookingException {
         Mockito.when(tarjetaRepository.findById(TARJETA_ID)).thenReturn(OPTIONAL_TARJETA);
         Mockito.when(docenteRepository.findById(DOCENTE_ID)).thenReturn(OPTIONAL_DOCENTE);
         Mockito.when(membresiaRepository.findById(MEMBRESIA_ID)).thenReturn(OPTIONAL_MEMBRESIA);

@@ -51,20 +51,20 @@ public class CursoServiceTest {
     }
 
     @Test
-    public void createCursoTest() throws BookingException{
+    public void createCursoTest() throws BookingException {
         Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);
         Mockito.when(cursoRepository.save(Mockito.any(Curso.class))).thenReturn(CURSO);
         cursoServiceImpl.createCurso(CREATE_CURSO_DTO);
     }
 
     @Test
-    public  void getCursoByIdTest()throws BookingException{
+    public void getCursoByIdTest() throws BookingException {
         Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);
         cursoServiceImpl.getCursoById(CURSO_ID);
     }
 
     @Test
-    public void getCursosTest() throws BookingException{
+    public void getCursosTest() throws BookingException {
         final Curso curso = new Curso();
         Mockito.when(cursoRepository.findAll()).thenReturn(Arrays.asList(curso));
         final List<CursoDto> response = cursoServiceImpl.getCursos();
@@ -72,6 +72,7 @@ public class CursoServiceTest {
         assertFalse(response.isEmpty());
         assertEquals(response.size(), 1);
     }
+
     @Test(expected = MockitoException.class)
     public void createTarjetaInternalServerErrorTest() throws BookingException {
         Mockito.when(cursoRepository.findById(CURSO_ID)).thenReturn(OPTIONAL_CURSO);

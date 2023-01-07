@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TarjetaRepository extends JpaRepository<Tarjeta,Long> {
+public interface TarjetaRepository extends JpaRepository<Tarjeta, Long> {
     Optional<Tarjeta> findById(Long id);
 
     @Query("select t from Tarjeta t where upper(t.nombrePoseedor) like upper(concat('%',?1,'%'))")

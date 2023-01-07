@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin({"http://localhost:4200"})
 @RestController
-@RequestMapping(path ="/tutofinder")
+@RequestMapping(path = "/tutofinder")
 public class FavoritoController {
 
     @Autowired
@@ -24,47 +24,49 @@ public class FavoritoController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/favoritos/{favoritoId}")
     public BookingResponse<FavoritoDto> getFavoritoById(@PathVariable Long favoritoId) throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.getFavoritoById(favoritoId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/favoritos/{padreId}")
     public BookingResponse<List<FavoritoDto>> getFavoritoByPadreId(@PathVariable Long padreId) throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.getFavoritoByPadreId(padreId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/favoritos")
-    public BookingResponse<List<FavoritoDto>> getFavoritos() throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<List<FavoritoDto>> getFavoritos() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.getFavoritos());
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/favoritos/pagina")
-    public BookingResponse<?> getFavoritos(Pageable pageable) throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<?> getFavoritos(Pageable pageable) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.getFavoritos(pageable));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/favoritos")
-    public BookingResponse<FavoritoDto> createFavorito(@RequestBody @Valid CreateFavoritoDto createFavoritoDto)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<FavoritoDto> createFavorito(@RequestBody @Valid CreateFavoritoDto createFavoritoDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.createFavorito(createFavoritoDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/favoritos/{favoritoId}")
-    public BookingResponse<FavoritoDto> updateFavorito(@PathVariable Long favoritoId, @RequestBody @Valid CreateFavoritoDto createFavoritoDto)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                favoritoService.updateFavorito(createFavoritoDto,favoritoId));
+    public BookingResponse<FavoritoDto> updateFavorito(@PathVariable Long favoritoId, @RequestBody @Valid CreateFavoritoDto createFavoritoDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                favoritoService.updateFavorito(createFavoritoDto, favoritoId));
     }
+
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/favoritos/{favoritoId}")
-    public BookingResponse<String> deleteFavorito(@PathVariable Long favoritoId) throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<String> deleteFavorito(@PathVariable Long favoritoId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 favoritoService.deleteFavorito(favoritoId));
     }
 

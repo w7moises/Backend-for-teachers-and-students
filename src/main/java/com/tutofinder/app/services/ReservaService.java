@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface ReservaService {
     ReservaDto getReservaById(Long reservaId) throws BookingException;
+
     List<ReservaDto> getReservas() throws BookingException;
+
     ReservaDto createReserva(CreateReservaDto createReservaDto) throws BookingException;
+
     String deleteReserva(Long reservaId) throws BookingException;
 }

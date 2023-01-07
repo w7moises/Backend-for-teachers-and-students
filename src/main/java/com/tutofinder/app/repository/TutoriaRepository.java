@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TutoriaRepository extends PagingAndSortingRepository<Tutoria,Long> {
+public interface TutoriaRepository extends PagingAndSortingRepository<Tutoria, Long> {
     Optional<Tutoria> findById(Long id);
 
     @Query(value = "SELECT t FROM Tutoria t ORDER BY CASE WHEN t.docente.membresia = true THEN 1 ELSE 2 END , t.docente.membresia")

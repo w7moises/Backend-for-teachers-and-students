@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PadreRepository extends JpaRepository<Padre,Long> {
+public interface PadreRepository extends JpaRepository<Padre, Long> {
     Optional<Padre> findById(Long id);
+
     Optional<Padre> findByNombre(String name);
 }

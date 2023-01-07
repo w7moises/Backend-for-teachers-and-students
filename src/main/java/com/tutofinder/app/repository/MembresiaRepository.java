@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MembresiaRepository extends JpaRepository<Membresia,Long> {
+public interface MembresiaRepository extends JpaRepository<Membresia, Long> {
     Optional<Membresia> findById(Long id);
+
     Optional<Membresia> findByDocenteId(Long docenteId);
-    Optional<Membresia> findByDocenteIdAndTarjetaId(Long docenteId , Long tarjetaId);
+
+    Optional<Membresia> findByDocenteIdAndTarjetaId(Long docenteId, Long tarjetaId);
 }

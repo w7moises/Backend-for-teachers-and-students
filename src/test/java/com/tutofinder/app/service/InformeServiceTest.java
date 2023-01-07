@@ -57,20 +57,20 @@ public class InformeServiceTest {
 
         INFORME.setId(INFORME_ID);
         INFORME.setDescripcionInforme(DESCRIPCION_INFORME);
-        
+
         CREATE_INFORME_DTO.setDescripcionInforme(DESCRIPCION_INFORME);
         CREATE_INFORME_DTO.setTutoriaId(TUTORIA_ID);
         CREATE_INFORME_DTO.setAlumnoId(ALUMNO_ID);
     }
 
     @Test
-    public void getInformeByIdTest() throws BookingException{
+    public void getInformeByIdTest() throws BookingException {
         Mockito.when(informeRepository.findById(INFORME_ID)).thenReturn(OPTIONAL_INFORME);
         informeServiceImpl.getInformeById(INFORME_ID);
     }
 
     @Test
-    public void getInformesTest() throws BookingException{
+    public void getInformesTest() throws BookingException {
         final Informe informe = new Informe();
         Mockito.when(informeRepository.findAll()).thenReturn(Arrays.asList(informe));
         final List<InformeDto> response = informeServiceImpl.getInformes();
@@ -80,7 +80,7 @@ public class InformeServiceTest {
     }
 
     @Test(expected = BookingException.class)
-    public void getInformeByIdTestError() throws BookingException{
+    public void getInformeByIdTestError() throws BookingException {
         Mockito.when(informeRepository.findById(INFORME_ID)).thenReturn(OPTIONAL_INFORME_EMPTY);
         informeServiceImpl.getInformeById(INFORME_ID);
         fail();
@@ -88,7 +88,7 @@ public class InformeServiceTest {
 
 
     @Test
-    public void createInformeTest() throws BookingException{
+    public void createInformeTest() throws BookingException {
         Mockito.when(tutoriaRepository.findById(TUTORIA_ID)).thenReturn(OPTIONAL_TUTORIA);
         Mockito.when(alumnoRepository.findById(ALUMNO_ID)).thenReturn(OPTIONAL_ALUMNO);
         Mockito.when(informeRepository.findById(INFORME_ID)).thenReturn(OPTIONAL_INFORME);

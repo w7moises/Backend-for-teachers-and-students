@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InformeRepository extends JpaRepository<Informe,Long> {
+public interface InformeRepository extends JpaRepository<Informe, Long> {
     Optional<Informe> findById(Long id);
 }

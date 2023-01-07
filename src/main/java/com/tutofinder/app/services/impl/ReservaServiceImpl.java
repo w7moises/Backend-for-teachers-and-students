@@ -42,35 +42,35 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public List<ReservaDto> getReservas() throws BookingException {
         List<Reserva> reservaEntity = reservaRepository.findAll();
-        return reservaEntity.stream().map(service->modelMapper.map(service,ReservaDto.class)).collect(Collectors.toList());
+        return reservaEntity.stream().map(service -> modelMapper.map(service, ReservaDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public ReservaDto createReserva(CreateReservaDto createReservaDto) throws BookingException {
         final Tutoria tutoria = tutoriaRepository.findById(createReservaDto.getTutoriaId()).
-                orElseThrow(()-> new NotFoundException("SNOT-404-1","TUTORIA_NOT_FOUND"));
+                orElseThrow(() -> new NotFoundException("SNOT-404-1", "TUTORIA_NOT_FOUND"));
         final Alumno alumno = alumnoRepository.findById(createReservaDto.getAlumnoId()).
-                orElseThrow(()-> new NotFoundException("SNOT-404-1","ALUMNO_NOT_FOUND"));
+                orElseThrow(() -> new NotFoundException("SNOT-404-1", "ALUMNO_NOT_FOUND"));
         Reserva reservaEntity = new Reserva();
         Long id;
         reservaEntity.setAlumno(alumno);
         reservaEntity.setTutoria(tutoria);
         try {
             id = reservaRepository.save(reservaEntity).getId();
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getReservaEntity(id),ReservaDto.class);
+        return modelMapper.map(getReservaEntity(id), ReservaDto.class);
     }
 
     @Override
     public String deleteReserva(Long reservaId) throws BookingException {
         reservaRepository.findById(reservaId)
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","PAGO_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "PAGO_NOT_FOUND"));
         try {
             reservaRepository.deleteById(reservaId);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
         return "RESERVA_DELETED";
     }
@@ -78,7 +78,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     private Reserva getReservaEntity(Long reservaId) throws NotFoundException {
         return reservaRepository.findById(reservaId)
-                .orElseThrow(()-> new NotFoundException("SNOT-404-1","RESERVA_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("SNOT-404-1", "RESERVA_NOT_FOUND"));
     }
 
 }

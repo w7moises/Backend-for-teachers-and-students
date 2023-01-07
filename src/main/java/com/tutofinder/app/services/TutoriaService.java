@@ -9,9 +9,14 @@ import java.util.List;
 
 public interface TutoriaService {
     TutoriaDto getTutoriaById(Long tutoriaId) throws BookingException;
+
     List<TutoriaDto> getTutorias() throws BookingException;
+
     List<TutoriaDto> getTutorias(Pageable pageable) throws BookingException;
+
     TutoriaDto createTutoria(CreateTutoriaDto createTutoriaDto) throws BookingException;
+
     TutoriaDto updateTutoria(CreateTutoriaDto createTutoriaDto, Long tutoriaId) throws BookingException;
+
     String deleteTutoria(Long tutoriaId) throws BookingException;
 }

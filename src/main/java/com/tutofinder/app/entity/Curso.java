@@ -9,13 +9,13 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="cursos")
+@Table(name = "cursos")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Curso {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)

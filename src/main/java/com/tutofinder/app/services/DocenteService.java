@@ -10,8 +10,12 @@ import java.util.List;
 
 public interface DocenteService {
     DocenteDto getDocenteById(Long docenteId) throws BookingException;
+
     List<DocenteDto> getDocentes() throws BookingException;
+
     DocenteDto createDocente(CreateDocenteDto createDocenteDto, MultipartFile archivo) throws BookingException, IOException;
+
     DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId, MultipartFile archivo) throws BookingException, IOException;
+
     String deleteDocente(Long docenteId) throws BookingException;
 }

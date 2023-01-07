@@ -46,19 +46,19 @@ public class AlumnoRepositoryTest {
         Date fecha2 = new Date();
         List myList = new ArrayList<Alumno>();
 
-        Padre padre = new Padre(id,"","","","",foto,fecha,myList);
+        Padre padre = new Padre(id, "", "", "", "", foto, fecha, myList);
         underTest2.save(padre);
 
         Optional<Padre> searchPadre = underTest2.findById(padre.getId());
 
-        Alumno alumno = new Alumno(id,nombre,apellido,gradoEstudio,searchPadre.get(),dni,correo,foto,fecha2);
+        Alumno alumno = new Alumno(id, nombre, apellido, gradoEstudio, searchPadre.get(), dni, correo, foto, fecha2);
         underTest.save(alumno);
 
-        Optional<Alumno> optionalAlumno= underTest.findById(id);
+        Optional<Alumno> optionalAlumno = underTest.findById(id);
 
         assertThat(optionalAlumno).isPresent().hasValueSatisfying(
-                c->{
-                    assertThat(c).isEqualToIgnoringGivenFields(alumno,"createAt");
+                c -> {
+                    assertThat(c).isEqualToIgnoringGivenFields(alumno, "createAt");
                 }
         );
     }
@@ -84,14 +84,14 @@ public class AlumnoRepositoryTest {
         Date fecha2 = new Date();
         List myList = new ArrayList<Alumno>();
 
-        Padre padre = new Padre(id,"","","","",foto,fecha,myList);
+        Padre padre = new Padre(id, "", "", "", "", foto, fecha, myList);
         //underTest2.save(padre);
 
         Optional<Padre> searchPadre = underTest2.findById(padre.getId());
 
-        Alumno alumno = new Alumno(id,null,apellido,gradoEstudio,padre,dni,correo,foto,fecha2);
+        Alumno alumno = new Alumno(id, null, apellido, gradoEstudio, padre, dni, correo, foto, fecha2);
 
-        assertThatThrownBy(()->underTest.save(alumno))
+        assertThatThrownBy(() -> underTest.save(alumno))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Alumno.nombre")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

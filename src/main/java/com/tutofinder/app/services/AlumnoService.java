@@ -10,8 +10,12 @@ import java.util.List;
 
 public interface AlumnoService {
     AlumnoDto getAlumnoById(Long alumnoId) throws BookingException;
+
     List<AlumnoDto> getAlumnos() throws BookingException;
+
     AlumnoDto createAlumno(CreateAlumnoDto createAlumnoDto, MultipartFile archivo) throws BookingException, IOException;
+
     AlumnoDto updateAlumno(CreateAlumnoDto createAlumnoDto, Long alumnoId, MultipartFile archivo) throws BookingException, IOException;
+
     String deleteAlumno(Long alumnoId) throws BookingException;
 }

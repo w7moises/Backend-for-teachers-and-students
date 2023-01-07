@@ -21,36 +21,36 @@ public class InformeController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/informes/{informeId}")
-    public BookingResponse<InformeDto> getInformeById(@PathVariable Long informeId)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<InformeDto> getInformeById(@PathVariable Long informeId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 informeService.getInformeById(informeId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/informes")
-    public BookingResponse<List<InformeDto>> getInformes() throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<List<InformeDto>> getInformes() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 informeService.getInformes());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/informes")
-    public BookingResponse<InformeDto> createInforme(@RequestBody @Valid CreateInformeDto createInformeDto)throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<InformeDto> createInforme(@RequestBody @Valid CreateInformeDto createInformeDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 informeService.createInforme(createInformeDto));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/informes/{informeId}")
-    public BookingResponse<InformeDto> updateInforme(@PathVariable Long informeId,@RequestBody @Valid CreateInformeDto createInformeDto)throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                informeService.updateInforme(createInformeDto,informeId));
+    public BookingResponse<InformeDto> updateInforme(@PathVariable Long informeId, @RequestBody @Valid CreateInformeDto createInformeDto) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                informeService.updateInforme(createInformeDto, informeId));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/informes/{informeId}")
-    public BookingResponse<String> deleteInforme(@PathVariable Long informeId)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<String> deleteInforme(@PathVariable Long informeId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 informeService.deleteInforme(informeId));
     }
 }

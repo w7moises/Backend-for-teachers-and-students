@@ -43,7 +43,7 @@ public class AlumnoServiceTest {
     public static final Alumno ALUMNO = new Alumno();
     public static final Padre PADRE = new Padre();
     public static final CreateAlumnoDto CREATE_ALUMNO_DTO = new CreateAlumnoDto();
-    
+
     private static final Optional<Alumno> OPTIONAL_ALUMNO = Optional.of(ALUMNO);
     private static final Optional<Padre> OPTIONAL_PADRE = Optional.of(PADRE);
     public static final List<Tutoria> TUTORIA_DTO_LIST = new ArrayList<>();

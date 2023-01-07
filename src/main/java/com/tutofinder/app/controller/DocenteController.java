@@ -28,7 +28,7 @@ public class DocenteController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/docentes/{docenteId}")
     public BookingResponse<DocenteDto> getDocenteById(@PathVariable Long docenteId) throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 docenteService.getDocenteById(docenteId));
     }
 
@@ -42,29 +42,29 @@ public class DocenteController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/docentes")
-    public BookingResponse<List<DocenteDto>> getDocentes() throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<List<DocenteDto>> getDocentes() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 docenteService.getDocentes());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/docentes")
-    public BookingResponse<DocenteDto> createDocente(@Valid CreateDocenteDto createDocenteDto,@RequestParam MultipartFile archivo)throws BookingException, IOException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                docenteService.createDocente(createDocenteDto,archivo));
+    public BookingResponse<DocenteDto> createDocente(@Valid CreateDocenteDto createDocenteDto, @RequestParam MultipartFile archivo) throws BookingException, IOException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                docenteService.createDocente(createDocenteDto, archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/docentes/{docenteId}")
-    public BookingResponse<DocenteDto> updateDocente(@Valid CreateDocenteDto createDocenteDto,@PathVariable Long docenteId,@RequestParam MultipartFile archivo)throws BookingException, IOException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                docenteService.updateDocente(createDocenteDto,docenteId,archivo));
+    public BookingResponse<DocenteDto> updateDocente(@Valid CreateDocenteDto createDocenteDto, @PathVariable Long docenteId, @RequestParam MultipartFile archivo) throws BookingException, IOException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                docenteService.updateDocente(createDocenteDto, docenteId, archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/docentes/{docenteId}")
-    public BookingResponse<String> deleteDocente(@PathVariable Long docenteId)throws BookingException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    public BookingResponse<String> deleteDocente(@PathVariable Long docenteId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 docenteService.deleteDocente(docenteId));
     }
 }

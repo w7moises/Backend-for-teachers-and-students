@@ -26,14 +26,14 @@ public class InformeRepositoryTest {
         Alumno alumno = new Alumno();
         Tutoria tutoria = new Tutoria();
 
-        Informe informe = new Informe(id,descripcionInforme,tutoria,alumno);
+        Informe informe = new Informe(id, descripcionInforme, tutoria, alumno);
 
         underTest.save(informe);
 
-        Optional<Informe> optionalInforme= underTest.findById(id);
+        Optional<Informe> optionalInforme = underTest.findById(id);
 
         assertThat(optionalInforme).isPresent().hasValueSatisfying(
-                c->{
+                c -> {
                     assertThat(c).isEqualTo(informe);
                 }
         );
@@ -45,9 +45,9 @@ public class InformeRepositoryTest {
         Alumno alumno = new Alumno();
         Tutoria tutoria = new Tutoria();
 
-        Informe informe = new Informe(id,null,tutoria,alumno);
+        Informe informe = new Informe(id, null, tutoria, alumno);
 
-        assertThatThrownBy(()->underTest.save(informe))
+        assertThatThrownBy(() -> underTest.save(informe))
                 .hasMessageContaining("not-null property references a null or transient value : com.tutofinder.app.entity.Informe.descripcionInforme")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }

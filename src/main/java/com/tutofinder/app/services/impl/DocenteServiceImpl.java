@@ -38,14 +38,14 @@ public class DocenteServiceImpl implements DocenteService {
         Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docenteId);
         Optional<Docente> docente = docenteRepository.findById(docenteId);
         Docente docenteEntity = docente.get();
-        if(membresiaEntity.isPresent()){
+        if (membresiaEntity.isPresent()) {
             docenteEntity.setMembresia(true);
         }
-        if(!membresiaEntity.isPresent()){
+        if (!membresiaEntity.isPresent()) {
             docenteEntity.setMembresia(false);
         }
         docenteRepository.save(docenteEntity);
-        return modelMapper.map(getDocenteEntity(docenteId),DocenteDto.class);
+        return modelMapper.map(getDocenteEntity(docenteId), DocenteDto.class);
     }
 
     @Override
@@ -55,17 +55,17 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.forEach(
                 docente -> {
                     Optional<Membresia> membresiaEntity = membresiaRepository.findByDocenteId(docente.getId());
-                    if(membresiaEntity.isPresent()){
+                    if (membresiaEntity.isPresent()) {
                         docente.setMembresia(true);
                     }
-                    if(!membresiaEntity.isPresent()){
+                    if (!membresiaEntity.isPresent()) {
                         docente.setMembresia(false);
                     }
                     docenteRepository.save(docente);
                 }
         );
         return docenteEntity.stream().map(
-                service->modelMapper.map(service,DocenteDto.class)).collect(Collectors.toList());
+                service -> modelMapper.map(service, DocenteDto.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -83,17 +83,17 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
         try {
             id = docenteRepository.save(docenteEntity).getId();
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getDocenteEntity(id),DocenteDto.class);
+        return modelMapper.map(getDocenteEntity(id), DocenteDto.class);
     }
 
     @Override
-    public DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId,MultipartFile archivo) throws BookingException, IOException {
+    public DocenteDto updateDocente(CreateDocenteDto createDocenteDto, Long docenteId, MultipartFile archivo) throws BookingException, IOException {
         Optional<Docente> docente = docenteRepository.findById(docenteId);
-        if(!docente.isPresent()){
-            throw new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND");
+        if (!docente.isPresent()) {
+            throw new NotFoundException("ID_NOT_FOOUND", "ID_NOT_FOUND");
         }
         Docente docenteEntity = docente.get();
         Long id;
@@ -107,26 +107,26 @@ public class DocenteServiceImpl implements DocenteService {
         docenteEntity.setNumeroCuenta(createDocenteDto.getNumeroCuenta());
         try {
             id = docenteRepository.save(docenteEntity).getId();
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getDocenteEntity(id),DocenteDto.class);
+        return modelMapper.map(getDocenteEntity(id), DocenteDto.class);
     }
 
     @Override
     public String deleteDocente(Long docenteId) throws BookingException {
         docenteRepository.findById(docenteId).
-                orElseThrow(()->new NotFoundException("ID_NOT_FOOUND","ID_NOT_FOUND"));
+                orElseThrow(() -> new NotFoundException("ID_NOT_FOOUND", "ID_NOT_FOUND"));
         try {
             docenteRepository.deleteById(docenteId);
-        } catch (final Exception e){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        } catch (final Exception e) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
         return "DOCENTE_DELETED";
     }
 
-    private Docente getDocenteEntity(Long docenteId) throws BookingException{
+    private Docente getDocenteEntity(Long docenteId) throws BookingException {
         return docenteRepository.findById(docenteId).
-                orElseThrow(() -> new NotFoundException("SNOT-404-1","DOCENTE_NOT_FOUND"));
+                orElseThrow(() -> new NotFoundException("SNOT-404-1", "DOCENTE_NOT_FOUND"));
     }
 }

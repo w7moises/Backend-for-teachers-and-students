@@ -27,8 +27,8 @@ public class AlumnoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/alumnos/{alumnoId}")
-    BookingResponse<AlumnoDto> getAlumnoById(@PathVariable Long alumnoId)throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    BookingResponse<AlumnoDto> getAlumnoById(@PathVariable Long alumnoId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 alumnoService.getAlumnoById(alumnoId));
     }
 
@@ -42,28 +42,29 @@ public class AlumnoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/alumnos")
-    BookingResponse<List<AlumnoDto>> getAlumnos()throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    BookingResponse<List<AlumnoDto>> getAlumnos() throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 alumnoService.getAlumnos());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/alumnos")
-    BookingResponse<AlumnoDto> createAlumno(@Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException, IOException {
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                alumnoService.createAlumno(createAlumnoDto,archivo));
+    BookingResponse<AlumnoDto> createAlumno(@Valid CreateAlumnoDto createAlumnoDto, @RequestParam MultipartFile archivo) throws BookingException, IOException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                alumnoService.createAlumno(createAlumnoDto, archivo));
     }
+
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/alumnos/{alumnoId}")
-    BookingResponse<AlumnoDto> updateAlumno(@PathVariable Long alumnoId , @Valid CreateAlumnoDto createAlumnoDto , @RequestParam MultipartFile archivo)throws BookingException , IOException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
-                alumnoService.updateAlumno(createAlumnoDto,alumnoId,archivo));
+    BookingResponse<AlumnoDto> updateAlumno(@PathVariable Long alumnoId, @Valid CreateAlumnoDto createAlumnoDto, @RequestParam MultipartFile archivo) throws BookingException, IOException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                alumnoService.updateAlumno(createAlumnoDto, alumnoId, archivo));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/alumnos/{alumnoId}")
-    BookingResponse<String> deleteAlumno(@PathVariable Long alumnoId)throws BookingException{
-        return new BookingResponse<>("Success",String.valueOf(HttpStatus.OK),"OK",
+    BookingResponse<String> deleteAlumno(@PathVariable Long alumnoId) throws BookingException {
+        return new BookingResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 alumnoService.deleteAlumno(alumnoId));
     }
 }

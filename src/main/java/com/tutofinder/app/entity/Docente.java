@@ -47,20 +47,20 @@ public class Docente {
     private String apellido;
 
     @NotEmpty(message = "El DNI del docente no puede estar vacio")
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String dni;
 
     @Column(nullable = false)
     private String domicilio;
 
     @Email(message = "El correo no puede ser vacio")
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String correo;
 
-    @Column(unique = true,nullable = false,name = "numero_cuenta")
+    @Column(unique = true, nullable = false, name = "numero_cuenta")
     private String numeroCuenta;
 
-    @Column(name = "costo_hora",nullable = false)
+    @Column(name = "costo_hora", nullable = false)
     private double CostoHora;
 
     private Boolean membresia;
@@ -82,7 +82,7 @@ public class Docente {
         this.createAt = new Date();
     }
 
-    public Integer getFotoHashCode(){
+    public Integer getFotoHashCode() {
         return (this.foto != null) ? this.foto.hashCode() : null;
     }
 }
